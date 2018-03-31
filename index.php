@@ -12,11 +12,23 @@ $input = json_decode(file_get_contents('php://input'),true);
 require './Database.php';
 
 $db = Database::getInstance();
-debug($db);
 
 if ($method == 'GET') {
-  debug($_GET);
-  debug($_SERVER);
+  $name = $_GET['name'];
+
+  if ($name == 'products') {
+    $mysqli = $db->getConnection(); 
+    $sql_query = 'SELECT * FROM Projects';
+    $result = $mysqli->query($sql_query);
+
+    // Cycle through results
+    while ($row = $result->fetch_object()){
+      $projects_arr[] = $row;
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($projects_arr);
+  }
 } else if ($method == 'POST') {
   debug($_POST);
 }

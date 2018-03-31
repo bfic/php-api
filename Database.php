@@ -24,19 +24,22 @@ class Database {
   public function getConnection() {
     if (is_null($this->_conn)) {
       $db = $this->_config;
-      $this->_conn = mysql_connect($db['hostname'], $db['username'], $db['password']);
+      $this->_conn = mysqli_connect($db['hostname'], $db['username'], $db['password'], $db['database']);
+
       if (!$this->_conn) {
-        die("Cannot connect to database server"); 
+          echo "Error: Unable to connect to MySQL." . PHP_EOL;
+          echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+          echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+          exit;
       }
-      if (!mysql_select_db($db['database'])) {
-        die("Cannot select database");
-      }
+      mysqli_close($link);
+
     }
     return $this->_conn;
   }
 
   public function query($query) {
     $conn = $this->getConnection();
-    return mysql_query($query, $conn);
+    return mysqli_query($query, $conn);
   }
 }
