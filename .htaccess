@@ -1,0 +1,4 @@
+RewriteEngine On    # Turn on the rewriting engine
+
+RewriteRule ^products$ index.php?name=products [NC,L]
+RewriteRule ^modules$ index.php?name=modules [NC,L]
