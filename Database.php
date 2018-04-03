@@ -1,5 +1,5 @@
 <?php
-
+p
 class Database {
   protected static $_instance = null;
 
@@ -25,7 +25,12 @@ class Database {
   public function getConnection() {
     if (is_null($this->_conn)) {
       $db = $this->_config;
-      $this->_conn = mysqli_connect($db['hostname'], $db['username'], $db['password'], $db['database']);
+      $this->_conn = mysqli_connect(
+        $db['hostname'], 
+        $db['username'], 
+        $db['password'], 
+        $db['database']
+      );
 
       if (!$this->_conn) {
           echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -33,8 +38,8 @@ class Database {
           echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
           exit;
       }
+      
       mysqli_close($link);
-
     }
     return $this->_conn;
   }
