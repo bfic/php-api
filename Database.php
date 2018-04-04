@@ -1,5 +1,5 @@
 <?php
-p
+
 class Database {
   protected static $_instance = null;
 
@@ -38,7 +38,7 @@ class Database {
           echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
           exit;
       }
-      
+
       mysqli_close($link);
     }
     return $this->_conn;
